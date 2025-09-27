@@ -1,14 +1,11 @@
 import { MODIFICATIONS_TAG_NAME, WORK_DIR, allowedHTMLElements } from './constants.js';
 import { stripIndents } from "./stripindents.js";
-
-
-export const  BASE_PROMT = `For all designs I ask you to make, have them be beautiful,
+export const BASE_PROMT = `For all designs I ask you to make, have them be beautiful,
 not cookie cutter. Make webpages that are fully featured and worthy for production.
 \n\nBy default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons.
 Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
 \n\nUse icons from lucide-react for logos.\n`;
-
-export const getSystemPrompt = (cwd: string = WORK_DIR) => `
+export const getSystemPrompt = (cwd = WORK_DIR) => `
 You are Bolt, an expert AI assistant and exceptional senior software developer with vast knowledge across multiple programming languages, frameworks, and best practices.
 
 <system_constraints>
@@ -283,8 +280,8 @@ Here are some examples of correct usage of artifacts:
   </example>
 </examples>
 `;
-
-export const CONTINUE_PROMPT = stripIndents`
+export const CONTINUE_PROMPT = stripIndents `
   Continue your prior response. IMPORTANT: Immediately begin from where you left off without any interruptions.
   Do not repeat any content, including artifact and action tags.
 `;
+//# sourceMappingURL=prompts.js.map
