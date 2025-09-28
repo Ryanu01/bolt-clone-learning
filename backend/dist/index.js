@@ -4,10 +4,12 @@ import { getSystemPrompt, BASE_PROMT } from "./prompts.js";
 import dotenv from "dotenv";
 import { basePrompt as nodeBsePromt } from "./defaults/node.js";
 import { basePrompt as reactBasePromt } from "./defaults/react.js";
+import cors from 'cors';
 dotenv.config();
 const ai = new GoogleGenAI({});
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.post('/template', async (req, res) => {
     const prompt = req.body.prompt;
     const response = await ai.models.generateContent({
@@ -32,12 +34,13 @@ app.post('/template', async (req, res) => {
     }
     if (answer == "node") {
         res.json({
-            prompts: [`Here is an artifact that contains all files of the project visible to you.\nConsider the contents of ALL files in the project.\n\n${reactBasePromt}\n\n
+            prompts: [`Here is an artifact that contains all files of the project visible to you.\nConsider the contents of ALL files in the project.\n\n${nodeBsePromt}\n\n
         Here is a list of files that exist on the file system but are not being shown to you:\n\n  - .gitignore\n  - package-lock.json\n`],
             uiPRompts: [nodeBsePromt]
         });
         return;
     }
+    console.log(answer);
     res.status(403).json({ message: "You cant accesst this" });
     return;
 });
@@ -50,9 +53,9 @@ app.post('/chat', async (req, res) => {
         },
         contents: messages
     });
-    const ans = response.text;
-    console.log(ans);
-    res.json({});
+    res.json({
+        response: response.text
+    });
 });
 app.listen(3000);
 //# sourceMappingURL=index.js.map
