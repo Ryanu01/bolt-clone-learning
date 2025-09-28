@@ -57,5 +57,5 @@ app.post('/chat', async (req, res) => {
         response: response.text
     });
 });
-app.listen(3000);
+app.listen(8080);
 //# sourceMappingURL=index.js.map
